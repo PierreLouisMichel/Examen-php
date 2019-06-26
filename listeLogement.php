@@ -2,7 +2,7 @@
 //RECUPERATION DES DONNEES
 $request = 'SELECT * FROM logement';
 $response = $bdd->query($request);
-$ecommerce = $response->fetchAll(PDO::FETCH_ASSOC);
+$posts = $response->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!doctype html>
@@ -39,43 +39,43 @@ $ecommerce = $response->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
                     <?php
                     //AFFICHAGE DES DONNEES
-                    foreach ($ecommerce as $produit) 
+                    foreach ($posts as $immo) 
                     {
                         echo "
                         <tr>
-                            <td>" . $produit['id_logement'] . "</td>";
-                            if (strlen($produit['titre']) < 50) {
-                            echo "<td> " . $produit['titre'] . " </td >"; // Affichage du titre complet si il fait moins de 50 charactères.
+                            <td>" . $immo['id_logement'] . "</td>";
+                            if (strlen($immo['titre']) < 50) {
+                            echo "<td> " . $immo['titre'] . " </td >"; // Affichage du titre complet si il fait moins de 50 charactères.
                             } 
                             else {
-                            echo "<td>" . substr($produit['titre'], 0, 50) . " ... </td >"; // Affichage des 50 premiers charactères suivis de ...
+                            echo "<td>" . substr($immo['titre'], 0, 50) . " ... </td >"; // Affichage des 50 premiers charactères suivis de ...
                             }
 
-                            if (strlen($produit['adresse']) < 50) {
-                            echo "<td> " . $produit['adresse'] . " </td >"; // Affichage de l'adresse complète si elle fait moins de 50 charactères.
+                            if (strlen($immo['adresse']) < 50) {
+                            echo "<td> " . $immo['adresse'] . " </td >"; // Affichage de l'adresse complète si elle fait moins de 50 charactères.
                             } 
                             else {
-                            echo "<td>" . substr($produit['adresse'], 0, 50) . " ... </td >"; // Affichage des 50 premiers charactères suivis de ...
+                            echo "<td>" . substr($immo['adresse'], 0, 50) . " ... </td >"; // Affichage des 50 premiers charactères suivis de ...
                             }
 
-                            if (strlen($produit['ville']) < 50) {
-                            echo "<td> " . $produit['ville'] . " </td >"; // Affichage du nom de la ville si il fait moins de 50 charactères.
+                            if (strlen($immo['ville']) < 50) {
+                            echo "<td> " . $immo['ville'] . " </td >"; // Affichage du nom de la ville si il fait moins de 50 charactères.
                             } 
                             else {
-                            echo "<td>" . substr($produit['ville'], 0, 50) . " ... </td >"; // Affichage des 50 premiers charactères suivis de ...
+                            echo "<td>" . substr($immo['ville'], 0, 50) . " ... </td >"; // Affichage des 50 premiers charactères suivis de ...
                             }
                             echo"
-                            <td>" . $produit['cp'] . "</td>
-                            <td>" . $produit['surface'] . "</td>
-                            <td>" . $produit['prix'] . " €</td>
-                            <td><img class='liste' src='uploads/" . $produit['photo'] . "' alt='" . $produit['photo'] . "'></td>
-                            <td>" . $produit['type'] . "</td>
+                            <td>" . $immo['cp'] . "</td>
+                            <td>" . $immo['surface'] . "</td>
+                            <td>" . $immo['prix'] . " €</td>
+                            <td><img class='liste' src='uploads/" . $immo['photo'] . "' alt='" . $immo['photo'] . "'></td>
+                            <td>" . $immo['type'] . "</td>
                             ";
-                        if (strlen($produit['description']) < 150) 
+                        if (strlen($immo['description']) < 150) 
                         {
-                            echo "<td> " . $produit['description'] . " </td >"; // Affichage de la description complète si elle fait moins de 150 charactères.
+                            echo "<td> " . $immo['description'] . " </td >"; // Affichage de la description complète si elle fait moins de 150 charactères.
                         } else {
-                            echo "<td>" . substr($produit['description'], 0, 150) . " ... </td >"; // Affichage des 150 premiers charactères suivis de ...
+                            echo "<td>" . substr($immo['description'], 0, 150) . " ... </td >"; // Affichage des 150 premiers charactères suivis de ...
                         }
                         echo "   
                         </tr >";
