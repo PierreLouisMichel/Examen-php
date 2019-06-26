@@ -1,5 +1,5 @@
 <?php require 'database.php';
-//EXERCICE 2
+//RECUPERATION DES DONNEES
 $request = 'SELECT * FROM logement';
 $response = $bdd->query($request);
 $ecommerce = $response->fetchAll(PDO::FETCH_ASSOC);
@@ -25,7 +25,7 @@ $ecommerce = $response->fetchAll(PDO::FETCH_ASSOC);
             <div class="col-12">
                 <a href="ajoutLogement.php">Ajout Logement</a>
                 <table class="table">
-                    <tr>
+                    <tr> <!--Titre des colonnes -->
                         <th>Id</th>
                         <th>Titre</th>
                         <th>Adresse Vendeur</th>
@@ -38,21 +38,47 @@ $ecommerce = $response->fetchAll(PDO::FETCH_ASSOC);
                         <th>Description</th>
                     </tr>
                     <?php
-                    foreach ($ecommerce as $produit) {
+                    //AFFICHAGE DES DONNEES
+                    foreach ($ecommerce as $produit) 
+                    {
                         echo "
-                    <tr>
-                        <td>" . $produit['id_logement'] . "</td>
-                        <td>" . $produit['titre'] . "</td>
-                        <td>" . $produit['adresse'] . "</td>
-                        <td>" . $produit['ville'] . "</td>
-                        <td>" . $produit['cp'] . "</td>
-                        <td>" . $produit['surface'] . "</td>
-                        <td>" . $produit['prix'] . " €</td>
-                        <td><img class='liste' src='" . $produit['photo'] . "' alt='" . $produit['photo'] . "'></td>
-                        <td>" . $produit['type'] . "</td>
-                        <td>" . $produit['description'] . "</td>
-                    </tr> 
-                    ";
+                        <tr>
+                            <td>" . $produit['id_logement'] . "</td>";
+                            if (strlen($produit['titre']) < 50) {
+                            echo "<td> " . $produit['titre'] . " </td >"; // Affichage du titre complet si il fait moins de 50 charactères.
+                            } 
+                            else {
+                            echo "<td>" . substr($produit['titre'], 0, 50) . " ... </td >"; // Affichage des 50 premiers charactères suivis de ...
+                            }
+
+                            if (strlen($produit['adresse']) < 50) {
+                            echo "<td> " . $produit['adresse'] . " </td >"; // Affichage de l'adresse complète si elle fait moins de 50 charactères.
+                            } 
+                            else {
+                            echo "<td>" . substr($produit['adresse'], 0, 50) . " ... </td >"; // Affichage des 50 premiers charactères suivis de ...
+                            }
+
+                            if (strlen($produit['ville']) < 50) {
+                            echo "<td> " . $produit['ville'] . " </td >"; // Affichage du nom de la ville si il fait moins de 50 charactères.
+                            } 
+                            else {
+                            echo "<td>" . substr($produit['ville'], 0, 50) . " ... </td >"; // Affichage des 50 premiers charactères suivis de ...
+                            }
+                            echo"
+                            <td>" . $produit['cp'] . "</td>
+                            <td>" . $produit['surface'] . "</td>
+                            <td>" . $produit['prix'] . " €</td>
+                            <td><img class='liste' src='uploads/" . $produit['photo'] . "' alt='" . $produit['photo'] . "'></td>
+                            <td>" . $produit['type'] . "</td>
+                            ";
+                        if (strlen($produit['description']) < 150) 
+                        {
+                            echo "<td> " . $produit['description'] . " </td >"; // Affichage de la description complète si elle fait moins de 150 charactères.
+                        } else {
+                            echo "<td>" . substr($produit['description'], 0, 150) . " ... </td >"; // Affichage des 150 premiers charactères suivis de ...
+                        }
+                        echo "   
+                        </tr >";
                     }
                     ?>
 
@@ -63,9 +89,11 @@ $ecommerce = $response->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-
+    <script src=" https: //code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"crossorigin="anonymous">
+    </script>
+    
+</body> 
 </html>
