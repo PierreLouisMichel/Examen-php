@@ -66,7 +66,7 @@ $posts = $response->fetchAll(PDO::FETCH_ASSOC);
                             }
                             echo"
                             <td>" . $immo['cp'] . "</td>
-                            <td>" . $immo['surface'] . "</td>
+                            <td>" . $immo['surface'] . "m²</td>
                             <td>" . $immo['prix'] . " €</td>
                             <td><img class='liste' src='uploads/" . $immo['photo'] . "' alt='" . $immo['photo'] . "'></td>
                             <td>" . $immo['type'] . "</td>
